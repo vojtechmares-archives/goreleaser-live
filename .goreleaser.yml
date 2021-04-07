@@ -32,6 +32,19 @@ changelog:
       - '^docs:'
       - '^test:'
 
+brews:
+  - name: goreleaser-live
+    tap:
+      owner: vojtechmares
+      name: homebrew-live
+    homepage: https://github.com/vojtechmares/goreleaser-live
+    url_template: "https://github.com/vojtechmares/goreleaser-live/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
+    folder: Formula
+    caveats: "GoReleaser example, source: https://github.com/vojtechmares/goreleaser-live"
+    description: "GoReleaser on #DevOpsLiveCZ"
+    test: |
+      system "#{bin}/goreleaser-live"
+
 dockers:
   - goos: linux
     goarch: amd64
