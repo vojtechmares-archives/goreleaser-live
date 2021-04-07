@@ -13,6 +13,7 @@ builds:
       - linux
       - windows
       - darwin
+    binary: goreleaser-live
 archives:
   - replacements:
       darwin: macOS
@@ -30,3 +31,26 @@ changelog:
     exclude:
       - '^docs:'
       - '^test:'
+
+dockers:
+  - goos: linux
+    goarch: amd64
+    image_tempates:
+      - "vojtechmares/goreleaser-live:stable"
+      - "vojtechmares/goreleaser-live:{{ .Tag }}"
+    skip_push: false
+    dockerfile: Dockerfile
+    build_flag_templates:
+      - "--label=org.opencontainers.image.created={{.Date}}"
+      - "--label=org.opencontainers.image.title={{.ProjectName}}"
+      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+      - "--label=org.opencontainers.image.version={{.Version}}"
+      - "--label=org.label-schema.schema-version=1.0"
+      - "--label=org.label-schema.version={{.Version}}"
+      - "--label=org.label-schema.name={{.ProjectName}}"
+      - "--label=com.github.actions.name={{.ProjectName}}"
+      - "--label=com.github.actions.description=Example"
+      - "--label=com.github.actions.icon=terminal"
+      - "--label=com.github.actions.color=blue"
+      - "--label=repository=https://github.com/vojtechmares/goreleaser-live"
+      - "--label=maintainer=Vojtech Mares <iam@vojtechmares.com>"
