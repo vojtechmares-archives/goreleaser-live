@@ -35,7 +35,7 @@ changelog:
 dockers:
   - goos: linux
     goarch: amd64
-    image_tempates:
+    image_templates:
       - "vojtechmares/goreleaser-live:stable"
       - "vojtechmares/goreleaser-live:{{ .Tag }}"
     skip_push: false
